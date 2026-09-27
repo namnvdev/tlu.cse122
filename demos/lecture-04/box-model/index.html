@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quan sát Box Model · CSE122</title>
+  <style>
+    :root{font-family:Arial,sans-serif;color:#102759;background:#f3f8ff;--blue:#0878f9;--line:#d4e6fb}*{box-sizing:border-box}body{margin:0}header{padding:14px max(18px,calc((100% - 980px)/2));display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line)}a{color:var(--blue);font-weight:bold;text-decoration:none}main{max-width:980px;margin:30px auto;padding:0 18px}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px}.controls label{font-weight:bold;font-size:13px}.controls input,.controls select{display:block;width:100%;margin-top:7px}button{padding:10px 12px;border:1px solid #c6ddf6;border-radius:7px;background:#f0f7ff;color:#14539a;font-weight:bold;cursor:pointer}.stage{margin-top:20px;min-height:225px;padding:25px;border:1px dashed #9db9db;background-color:#f8fbff;display:grid;place-items:center;overflow:auto}.target{width:220px;min-height:100px;box-sizing:content-box;padding:16px;border:6px solid #0878f9;margin:12px;background:#dff1ff;display:grid;place-items:center;text-align:center}.target.border-box{box-sizing:border-box}.readout{font:13px/1.7 monospace;white-space:pre-wrap;background:#10243c;color:#e2f1ff;border-radius:9px;padding:13px}.return{display:inline-block;margin:8px 0 24px}@media(max-width:540px){header{gap:10px;flex-wrap:wrap}}
+  </style>
+</head>
+<body><header><strong>CSE122 · Demo Box Model</strong><a href="../../../lectures/lecture-04/index.html">← Về Bài giảng 04</a></header>
+<main><h1>Điều chỉnh kích thước hộp</h1><p>Thay giá trị để quan sát vùng content, padding, border, margin và kích thước tổng.</p>
+  <section class="panel"><div class="controls"><label for="padding">Padding <input id="padding" type="range" min="0" max="40" value="16"></label><label for="border">Border <input id="border" type="range" min="0" max="18" value="6"></label><label for="margin">Margin <input id="margin" type="range" min="0" max="32" value="12"></label><label for="mode">box-sizing<select id="mode"><option value="content-box">content-box</option><option value="border-box">border-box</option></select></label></div>
+    <div class="stage"><div id="target" class="target">CONTENT<br>width: 220px</div></div><pre class="readout" id="readout"></pre>
+    <p>Margin nằm ngoài border. DevTools → Elements → Box Model cũng thể hiện các lớp riêng.</p></section><a class="return" href="../../../lectures/lecture-04/index.html">← Quay lại Lecture 04</a>
+</main><script>
+const box=document.querySelector('#target'),padding=document.querySelector('#padding'),border=document.querySelector('#border'),margin=document.querySelector('#margin'),mode=document.querySelector('#mode'),readout=document.querySelector('#readout');
+function update(){box.style.padding=padding.value+'px';box.style.borderWidth=border.value+'px';box.style.margin=margin.value+'px';box.classList.toggle('border-box',mode.value==='border-box');const r=box.getBoundingClientRect(),c=getComputedStyle(box);readout.textContent='box-sizing: '+c.boxSizing+'\ncontent width: 220px\npadding: '+c.paddingTop+'\nborder: '+c.borderTopWidth+'\nmargin: '+c.marginTop+' (ngoài border)\nrendered border-box width: '+Math.round(r.width)+'px';}
+[padding,border,margin,mode].forEach(el=>el.addEventListener('input',update));update();
+</script></body></html>

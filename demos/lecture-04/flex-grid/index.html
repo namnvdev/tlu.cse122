@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>So sánh Flexbox và Grid · CSE122</title>
+  <style>
+    :root{font-family:Arial,sans-serif;color:#102759;background:#f3f8ff;--blue:#0878f9;--line:#d4e6fb}*{box-sizing:border-box}body{margin:0}header{padding:14px max(18px,calc((100% - 980px)/2));display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line)}a{color:var(--blue);font-weight:bold;text-decoration:none}main{max-width:980px;margin:30px auto;padding:0 18px}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}.actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:10px 12px;border:1px solid #c6ddf6;border-radius:7px;background:#f0f7ff;color:#14539a;font-weight:bold;cursor:pointer}.gallery{display:flex;gap:12px;margin:16px 0;padding:16px;border:1px dashed #abc7e8;border-radius:10px}.gallery.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.card{min-height:100px;padding:15px;border:1px solid var(--line);border-radius:9px;background:#eff8ff;display:grid;place-items:center;text-align:center}.gallery.flex .card{flex:1}.readout{padding:12px;background:#10243c;color:#e2f1ff;border-radius:9px;font:12px/1.6 monospace;white-space:pre-wrap}.return{display:inline-block;margin:8px 0 25px}@media(max-width:540px){header{gap:10px;flex-wrap:wrap}}
+  </style>
+</head>
+<body><header><strong>CSE122 · Demo Flexbox / Grid</strong><a href="../../../lectures/lecture-04/index.html">← Về Bài giảng 04</a></header>
+<main><h1>Một nhóm item · hai layout model</h1><p>Dùng cùng các card để thấy Flexbox sắp theo một trục; Grid chia tracks theo hàng và cột.</p>
+  <section class="panel"><div class="actions"><button id="flex">Hiện Flexbox</button><button id="grid">Hiện Grid</button></div><div class="gallery flex" id="gallery"><article class="card">HTML<br><small>Nội dung</small></article><article class="card">CSS<br><small>Trình bày</small></article><article class="card">JavaScript<br><small>Tương tác</small></article><article class="card">API<br><small>Dữ liệu</small></article></div><pre class="readout" id="readout"></pre><p>DevTools → Elements cho thấy display, gap, flex items hoặc grid tracks.</p></section>
+  <a class="return" href="../../../lectures/lecture-04/index.html">← Quay lại Lecture 04</a>
+</main><script>
+const gallery=document.querySelector('#gallery'),readout=document.querySelector('#readout');
+function show(mode){gallery.className='gallery '+mode;readout.textContent=mode==='flex'?'.gallery { display: flex; gap: 12px; }\n.card { flex: 1; }\nItems xếp theo main axis.':'.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }\nTracks xác định hàng và cột.';}
+document.querySelector('#flex').addEventListener('click',()=>show('flex'));document.querySelector('#grid').addEventListener('click',()=>show('grid'));show('flex');
+</script></body></html>

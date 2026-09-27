@@ -1,0 +1,7 @@
+.cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));align-content:start}
+.card p{font-size:clamp(10px,.9vw,13px)}
+#slide article{width:100%}
+#slide article>.lead{margin-top:13px}
+#slide article>.cards{margin-top:15px}
+.reference-cards{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.code{font-size:clamp(11px,1.05vw,15px)}

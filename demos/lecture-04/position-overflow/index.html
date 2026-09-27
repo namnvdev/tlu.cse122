@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Normal flow, position và overflow · CSE122</title>
+  <style>
+    :root{font-family:Arial,sans-serif;color:#102759;background:#f3f8ff;--accent:#0878f9;--line:#d4e6fb}*{box-sizing:border-box}body{margin:0}header{padding:14px max(18px,calc((100% - 950px)/2));display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line)}a{color:var(--accent);font-weight:bold;text-decoration:none}main{max-width:950px;margin:30px auto;padding:0 18px}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}.actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:10px 12px;border:1px solid #c6ddf6;border-radius:7px;background:#f0f7ff;color:#14539a;font-weight:bold;cursor:pointer}.scene{position:relative;padding:20px;margin-top:16px;border:1px dashed #abc7e8;border-radius:10px;min-height:230px}.block{padding:12px;margin:8px 0;border-radius:8px;background:#e8f4ff}.badge{background:#0878f9;color:#fff;padding:7px 10px;border-radius:7px;font-weight:bold;display:inline-block}.scene.relative .badge{position:relative;top:10px;left:15px}.scene.absolute .badge{position:absolute;right:12px;top:12px}.scrollbox{height:115px;overflow:auto;border:2px solid #bdd5f2;border-radius:8px;padding:10px;margin-top:13px}.chip{display:inline-block;margin:5px;padding:8px;border-radius:8px;background:var(--accent);color:white}.chip:hover{filter:brightness(.85)}.chip::after{content:' · item';opacity:.8}.readout{padding:12px;background:#10243c;color:#e2f1ff;border-radius:9px;font:12px/1.6 monospace;white-space:pre-wrap}.return{display:inline-block;margin:8px 0 25px}@media(max-width:540px){header{gap:10px;flex-wrap:wrap}}
+  </style>
+</head>
+<body><header><strong>CSE122 · Demo Position & Overflow</strong><a href="../../../lectures/lecture-04/index.html">← Về Bài giảng 04</a></header>
+<main><h1>Quan sát phần tử trong layout</h1><p>Chuyển vị trí của nhãn; cuộn riêng trong khung để nhận biết overflow.</p>
+  <section class="panel"><div class="actions"><button data-mode="flow">Normal flow</button><button data-mode="relative">position: relative</button><button data-mode="absolute">position: absolute</button></div><div class="scene" id="scene"><div class="block">Block A · nằm trong normal flow</div><span class="badge">Nhãn</span><div class="block">Block B · vị trí tiếp theo trong flow</div></div><div class="scrollbox"><b>Khung có overflow: auto</b><p>Đoạn nội dung đầu.</p><p>Đoạn nội dung kế tiếp.</p><p>Đoạn nội dung vượt chiều cao.</p><p>Kéo thanh cuộn để xem phần còn lại của khung.</p></div><pre class="readout" id="readout"></pre></section>
+  <section class="panel"><h2>Pseudo-class, pseudo-element và custom property</h2><span class="chip">Di chuột qua</span><p>Hover đổi độ sáng; ::after thêm nhãn; màu nền đến từ --accent trên root.</p><button id="color">Đổi --accent</button></section><a class="return" href="../../../lectures/lecture-04/index.html">← Quay lại Lecture 04</a>
+</main><script>
+const scene=document.querySelector('#scene'),readout=document.querySelector('#readout');
+function show(mode){scene.className='scene '+(mode==='flow'?'':mode);const c=getComputedStyle(document.querySelector('.badge'));readout.textContent='mode: '+(mode==='flow'?'normal flow':mode)+'\nbadge position: '+c.position+'\nnormal flow items: block A → nhãn → block B';}
+document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.mode)));show('flow');
+document.querySelector('#color').addEventListener('click',()=>{const r=document.documentElement;r.style.setProperty('--accent',getComputedStyle(r).getPropertyValue('--accent').trim()==='#0878f9'?'#a64224':'#0878f9');});
+</script></body></html>
