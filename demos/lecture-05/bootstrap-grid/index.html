@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Grid · CSE122</title>
+  <link rel="stylesheet" href="../../../assets/vendor/bootstrap/bootstrap.min.css">
+  <style>.demo-label{font-size:.75rem;color:#506987}.demo-box{height:100%;padding:1rem;background:#eaf4ff;border:1px solid #c5def7;border-radius:.6rem}.readout{position:sticky;top:0;z-index:2}.return{color:#075caa;font-weight:600}</style>
+</head>
+<body class="bg-light">
+  <header class="bg-white border-bottom"><div class="container py-3 d-flex justify-content-between align-items-center"><strong>CSE122 · Demo Bootstrap Grid</strong><a class="return" href="../../../lectures/lecture-05/index.html">← Bài giảng 05</a></div></header>
+  <main class="container py-4"><p id="width" class="readout alert alert-primary py-2" aria-live="polite"></p><h1 class="h2">Một grid · nhiều breakpoint</h1><p class="text-secondary">Các cột xếp 12/12 ở xs, 6/12 từ md và 4/12 từ xl. Resize viewport để quan sát.</p>
+    <section class="row g-3"><article class="col-12 col-md-6 col-xl-4"><div class="demo-box"><span class="demo-label">col-12 col-md-6 col-xl-4</span><h2 class="h5 mt-2">HTML semantic</h2><p class="mb-0">Container có max-width theo breakpoint.</p></div></article><article class="col-12 col-md-6 col-xl-4"><div class="demo-box"><span class="demo-label">col-12 col-md-6 col-xl-4</span><h2 class="h5 mt-2">Responsive CSS</h2><p class="mb-0">Row và gutter chia không gian cho cột.</p></div></article><article class="col-12 col-md-6 col-xl-4"><div class="demo-box"><span class="demo-label">col-12 col-md-6 col-xl-4</span><h2 class="h5 mt-2">Giao diện</h2><p class="mb-0">Utilities điều chỉnh spacing và màu.</p></div></article></section>
+    <section class="mt-4 p-3 bg-white border rounded"><h2 class="h5">Căn giữa một vùng</h2><div class="row"><div class="col-12 col-lg-8 mx-auto"><div class="demo-box">col-lg-8 mx-auto</div></div></div></section><a class="return d-inline-block mt-4" href="../../../lectures/lecture-05/index.html">← Quay lại Lecture 05</a>
+  </main><script>const out=document.querySelector('#width');const mq=[['sm',576],['md',768],['lg',992],['xl',1200],['xxl',1400]];function update(){const match=mq.filter(([,n])=>innerWidth>=n).at(-1);out.textContent='Viewport '+innerWidth+'px · breakpoint hiện hành: '+(match?match[0]+' (≥'+match[1]+'px)':'xs (<576px)');}addEventListener('resize',update);update();</script>
+</body></html>
