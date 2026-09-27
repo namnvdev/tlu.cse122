@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arrays & objects · CSE122</title>
+  <style>
+    :root{font:16px/1.55 system-ui,sans-serif;color:#102654;background:#f3f8ff}*{box-sizing:border-box}body{margin:0;padding:clamp(1rem,4vw,3rem)}main{max-width:960px;margin:auto}a{color:#075ca8}h1{line-height:1.15}section{background:white;border:1px solid #cfe2ff;border-radius:16px;padding:1.25rem;margin:1rem 0}pre{overflow:auto;background:#10213f;color:#e9f3ff;padding:1rem;border-radius:12px}label{font-weight:650}input{font:inherit;padding:.55rem;border:1px solid #8195b6;border-radius:7px;max-width:10rem}button{background:#075ca8;color:#fff;border:0;border-radius:8px;padding:.65rem 1rem;font:inherit;cursor:pointer;margin-left:.4rem}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #ffbf47;outline-offset:3px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem;margin-top:1rem}.card{border:1px solid #cfe2ff;border-radius:10px;padding:1rem}.card strong,.card span{display:block}.summary{background:#eef6ff;border-radius:8px;padding:1rem;margin-top:1rem}.meta{color:#4a5d7a}
+  </style>
+</head>
+<body><main>
+  <p><a href="../../../lectures/lecture-06/index.html">← Về Bài giảng 06</a> · <a href="../../../index.html">Course Home</a></p>
+  <h1>Array và object: tóm tắt sản phẩm</h1>
+  <p class="meta">Mỗi object biểu diễn một sản phẩm; array lưu danh sách. filter, map và reduce tạo các góc nhìn từ cùng dữ liệu.</p>
+  <section><h2>Mã nguồn</h2><pre><code>const products = [
+  { name: "Sổ tay", price: 45_000, stock: 12 },
+  { name: "Bút máy", price: 120_000, stock: 4 }
+];
+const affordable = products.filter(p => p.price &lt;= limit);
+const labels = affordable.map(({ name, price }) => ({ name, price }));
+const total = labels.reduce((sum, item) => sum + item.price, 0);</code></pre>
+    <label for="limit">Giá tối đa (₫)</label> <input id="limit" type="number" min="0" step="5000" value="100000">
+    <button id="run" type="button">Lọc và tổng hợp</button>
+    <div id="products" class="grid" aria-live="polite"></div><div id="summary" class="summary" aria-live="polite"></div>
+  </section>
+</main>
+<script>
+const products = [
+  { name: 'Sổ tay', price: 45000, stock: 12 },
+  { name: 'Bút máy', price: 120000, stock: 4 },
+  { name: 'Bình nước', price: 95000, stock: 7 },
+  { name: 'Túi vải', price: 75000, stock: 0 }
+];
+const limitInput = document.querySelector('#limit');
+const productRoot = document.querySelector('#products');
+const summary = document.querySelector('#summary');
+function renderProducts() {
+  if (!limitInput.reportValidity()) return;
+  const limit = Number(limitInput.value);
+  const affordable = products.filter(product => product.price <= limit);
+  const labels = affordable.map(({ name, price, stock }) => ({ name, price, stock }));
+  const total = labels.reduce((sum, item) => sum + item.price, 0);
+  productRoot.replaceChildren(...labels.map(({ name, price, stock }) => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    const title = document.createElement('strong');
+    title.textContent = name;
+    const details = document.createElement('span');
+    details.textContent = `${price.toLocaleString('vi-VN')} ₫ · Tồn kho: ${stock}`;
+    card.append(title, details);
+    return card;
+  }));
+  summary.textContent = labels.length
+    ? `${labels.length} sản phẩm trong ngưỡng · Tổng giá niêm yết: ${total.toLocaleString('vi-VN')} ₫`
+    : 'Không có sản phẩm trong ngưỡng giá này.';
+}
+document.querySelector('#run').addEventListener('click', renderProducts);
+renderProducts();
+</script></body></html>

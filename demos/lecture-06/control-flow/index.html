@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control flow & functions · CSE122</title>
+  <style>
+    :root{font:16px/1.55 system-ui,sans-serif;color:#102654;background:#f3f8ff}*{box-sizing:border-box}body{margin:0;padding:clamp(1rem,4vw,3rem)}main{max-width:920px;margin:auto}a{color:#075ca8}h1{line-height:1.15}section{background:white;border:1px solid #cfe2ff;border-radius:16px;padding:1.25rem;margin:1rem 0}pre{overflow:auto;background:#10213f;color:#e9f3ff;padding:1rem;border-radius:12px}label{display:block;font-weight:650;margin:.5rem 0}input{font:inherit;padding:.55rem;border:1px solid #8195b6;border-radius:7px;max-width:12rem}button{background:#075ca8;color:#fff;border:0;border-radius:8px;padding:.65rem 1rem;font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #ffbf47;outline-offset:3px}output{display:block;white-space:pre-wrap;background:#eef6ff;padding:1rem;border-radius:8px;min-height:4rem;margin-top:1rem}.meta{color:#4a5d7a}
+  </style>
+</head>
+<body><main>
+  <p><a href="../../../lectures/lecture-06/index.html">← Về Bài giảng 06</a> · <a href="../../../index.html">Course Home</a></p>
+  <h1>Điều kiện, vòng lặp và hàm</h1>
+  <p class="meta">Đầu vào được kiểm tra trước khi hàm phân loại điểm. Vòng lặp hiển thị các mốc đã xét.</p>
+  <section><h2>Mã nguồn</h2><pre><code>function classify(score) {
+  if (score >= 8) return "Tốt";
+  if (score >= 5) return "Đạt";
+  return "Cần cố gắng";
+}
+const scores = [4, 5, 8, 10];
+for (const score of scores) {
+  console.log(score, classify(score));
+}</code></pre>
+    <label for="score">Điểm cần phân loại (0–10)</label><input id="score" type="number" min="0" max="10" step="0.5" value="7.5">
+    <button id="run" type="button">Tính kết quả</button><output id="result" aria-live="polite"></output>
+  </section>
+</main>
+<script>
+function classify(score) {
+  if (score >= 8) return 'Tốt';
+  if (score >= 5) return 'Đạt';
+  return 'Cần cố gắng';
+}
+const scoreInput = document.querySelector('#score');
+const result = document.querySelector('#result');
+function runExample() {
+  if (!scoreInput.reportValidity()) return;
+  const score = Number(scoreInput.value);
+  const scores = [4, 5, 8, 10];
+  const examples = [];
+  for (const item of scores) examples.push(`${item} → ${classify(item)}`);
+  result.textContent = `Điểm ${score} → ${classify(score)}\nCác mốc: ${examples.join(' · ')}`;
+}
+document.querySelector('#run').addEventListener('click', runExample);
+runExample();
+</script></body></html>
