@@ -1,0 +1,60 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Promise và async/await · CSE122</title>
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#102654;background:#f3f8ff}*{box-sizing:border-box}body{margin:0;padding:clamp(1rem,4vw,3rem)}main{max-width:900px;margin:auto}a{color:#075ca8}section{background:#fff;border:1px solid #cfe2ff;border-radius:16px;padding:clamp(1rem,3vw,1.5rem);margin:1rem 0}.actions{display:flex;gap:.7rem;flex-wrap:wrap}button{font:inherit;padding:.65rem 1rem;border:0;border-radius:8px;background:#075ca8;color:white;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #ffbf47;outline-offset:3px}output{display:block;white-space:pre-wrap;background:#eef6ff;border-radius:8px;padding:1rem;min-height:9rem;margin-top:1rem}pre{overflow:auto;background:#10213f;color:#e9f3ff;padding:1rem;border-radius:12px}.meta{color:#4a5d7a}
+</style>
+</head>
+<body><main>
+<p><a href="../../../lectures/lecture-09/index.html">← Về Bài giảng 09</a> · <a href="../../../index.html">Course Home</a></p>
+<h1>Promise chain và async/await</h1>
+<p class="meta">Mỗi tác vụ hoàn tất sau một timer. Chọn nhánh thành công hoặc thất bại để theo dõi chuỗi xử lý và dọn trạng thái.</p>
+<section><h2>Chạy thử</h2><div class="actions"><button id="chain-ok" type="button">Promise · thành công</button><button id="chain-error" type="button">Promise · lỗi</button><button id="async-run" type="button">async/await</button></div><output id="log" aria-live="polite">Chọn một cách chạy.</output></section>
+<section><h2>Quy ước kết quả</h2><pre><code>function getResult(shouldFail) {
+  return new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      if (shouldFail) reject(new Error("Tác vụ thất bại"));
+      else resolve("Dữ liệu đã sẵn sàng");
+    }, 400);
+  });
+}</code></pre></section>
+</main>
+<script>
+const log = document.querySelector('#log');
+function getResult(shouldFail) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (shouldFail) reject(new Error('Tác vụ thất bại'));
+      else resolve('Dữ liệu đã sẵn sàng');
+    }, 400);
+  });
+}
+function write(lines) { log.textContent = lines.join('\n'); }
+document.querySelector('#chain-ok').addEventListener('click', () => {
+  const lines = ['Promise chain: bắt đầu']; write(lines);
+  getResult(false)
+    .then(value => { lines.push(`then: ${value}`); write(lines); })
+    .catch(error => { lines.push(`catch: ${error.message}`); write(lines); })
+    .finally(() => { lines.push('finally: hoàn tất'); write(lines); });
+});
+document.querySelector('#chain-error').addEventListener('click', () => {
+  const lines = ['Promise chain: bắt đầu']; write(lines);
+  getResult(true)
+    .then(value => { lines.push(`then: ${value}`); write(lines); })
+    .catch(error => { lines.push(`catch: ${error.message}`); write(lines); })
+    .finally(() => { lines.push('finally: hoàn tất'); write(lines); });
+});
+document.querySelector('#async-run').addEventListener('click', async () => {
+  const lines = ['async/await: bắt đầu']; write(lines);
+  try {
+    const value = await getResult(false);
+    lines.push(`try: ${value}`); write(lines);
+  } catch (error) {
+    lines.push(`catch: ${error.message}`); write(lines);
+  } finally {
+    lines.push('finally: hoàn tất'); write(lines);
+  }
+});
+</script></body></html>
