@@ -1,5 +1,12 @@
 ﻿const slideRoot = document.querySelector('#slide');
 const overview = document.querySelector('#overview');
+const slideNumber = document.querySelector('#slide-no');
+if (slideNumber && !document.querySelector('#footer-attribution')) {
+  const attribution = document.createElement('span');
+  attribution.id = 'footer-attribution';
+  attribution.textContent = '@namnv';
+  slideNumber.before(attribution);
+}
 let current = Number(location.hash.slice(1)) - 1;
 if (!Number.isInteger(current) || current < 0 || current >= slides.length) current = 0;
 

@@ -27,3 +27,6 @@ figure.visual.visual-v14-event-loop img{max-height:56vh}
 figure.visual.teaching-visual img{max-height:45vh}
 figure.visual.visual-v14-event-loop img{max-height:56vh}
 figure.visual.visual-v09-responsive-viewports img{max-height:39vh}
+
+#footer-attribution{flex:0 0 auto;margin-left:12px;color:#667b99;font-size:9px;font-weight:500;white-space:nowrap}
+@media(max-width:800px){footer{position:relative;gap:4px;padding:0 8px}footer>span:nth-of-type(1){display:none}footer a.prev-lecture{margin-left:3px}#footer-attribution{position:absolute;right:62px;top:50%;transform:translateY(-50%);margin:0;font-size:8px}#slide-no{position:absolute;right:8px;top:50%;transform:translateY(-50%);margin:0;padding-left:7px}}
