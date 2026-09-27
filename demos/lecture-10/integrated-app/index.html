@@ -1,0 +1,20 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Demo tích hợp Fetch API, component functions và giao diện responsive.">
+<title>Project Integration · CSE122</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header"><p><a href="../../../lectures/lecture-10/index.html">← Về Bài giảng 10</a> · <a href="../../../index.html">Course Home</a></p></header>
+<main>
+<section class="hero"><p class="eyebrow">CSE122 · FRONTEND PROJECT</p><h1>Danh mục sản phẩm</h1><p>Dữ liệu JSON → service module → UI state → product components.</p></section>
+<section class="toolbar" aria-labelledby="catalog-title"><div><h2 id="catalog-title">Sản phẩm</h2><label for="search">Lọc theo tên hoặc nhóm</label><input id="search" type="search" autocomplete="off" placeholder="Ví dụ: sách"></div><button id="reload" type="button">Tải lại dữ liệu</button></section>
+<p id="status" class="status" role="status" aria-live="polite">Chưa tải dữ liệu.</p>
+<section id="products" class="product-grid" aria-label="Danh sách sản phẩm"></section>
+</main>
+<footer><p>Demo local API integration · CSE122</p></footer>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

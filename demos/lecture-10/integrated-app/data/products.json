@@ -1,0 +1,6 @@
+﻿[
+  { "id": 1, "name": "Sổ tay thiết kế Web", "category": "Sách", "description": "Ghi chép ý tưởng giao diện và luồng dữ liệu.", "price": 85000 },
+  { "id": 2, "name": "Bàn phím cơ bản", "category": "Thiết bị", "description": "Bàn phím gọn cho góc học tập.", "price": 420000 },
+  { "id": 3, "name": "Bình nước tái sử dụng", "category": "Phụ kiện", "description": "Bình thép không gỉ dung tích 500 ml.", "price": 135000 },
+  { "id": 4, "name": "Thẻ nhớ USB", "category": "Thiết bị", "description": "Lưu trữ tệp bài tập và tài liệu.", "price": 190000 }
+]
