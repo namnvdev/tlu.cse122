@@ -1,0 +1,6 @@
+config.json
+.env
+.editorconfig
+.vscode/
+agents/
+*.ps1
