@@ -1,0 +1,35 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event Loop · CSE122</title>
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#102654;background:#f3f8ff}*{box-sizing:border-box}body{margin:0;padding:clamp(1rem,4vw,3rem)}main{max-width:900px;margin:auto}a{color:#075ca8}section{background:#fff;border:1px solid #cfe2ff;border-radius:16px;padding:clamp(1rem,3vw,1.5rem);margin:1rem 0}button{font:inherit;padding:.65rem 1rem;border:0;border-radius:8px;background:#075ca8;color:#fff;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #ffbf47;outline-offset:3px}ol{padding-left:2rem;min-height:8rem}li{padding:.25rem .4rem;margin:.3rem 0;background:#eef6ff;border-radius:6px}.meta{color:#4a5d7a}pre{overflow:auto;background:#10213f;color:#e9f3ff;padding:1rem;border-radius:12px}
+</style>
+</head>
+<body><main>
+<p><a href="../../../lectures/lecture-08/index.html">← Về Bài giảng 08</a> · <a href="../../../index.html">Course Home</a></p>
+<h1>Call stack và timer callback</h1>
+<p class="meta">Mỗi lần chạy, các bước đồng bộ hoàn tất trước callback setTimeout.</p>
+<section><button id="run" type="button">Chạy thứ tự log</button><ol id="log" aria-live="polite"></ol></section>
+<section><h2>Mã đang chạy</h2><pre><code>console.log("A · bắt đầu");
+setTimeout(() =&gt; console.log("C · timer"), 0);
+console.log("B · tiếp tục đồng bộ");</code></pre></section>
+</main>
+<script>
+const list = document.querySelector('#log');
+let runNumber = 0;
+function addLine(text) {
+  const item = document.createElement('li');
+  item.textContent = text;
+  list.append(item);
+}
+document.querySelector('#run').addEventListener('click', () => {
+  runNumber += 1;
+  list.replaceChildren();
+  const prefix = `Lần ${runNumber} · `;
+  addLine(`${prefix}A — bắt đầu đồng bộ`);
+  setTimeout(() => addLine(`${prefix}C — callback timer`), 0);
+  addLine(`${prefix}B — tiếp tục đồng bộ`);
+});
+</script></body></html>

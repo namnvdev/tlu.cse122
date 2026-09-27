@@ -1,0 +1,46 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Events & Forms · CSE122</title>
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#102654;background:#f3f8ff}*{box-sizing:border-box}body{margin:0;padding:clamp(1rem,4vw,3rem)}main{max-width:900px;margin:auto}a{color:#075ca8}section{background:#fff;border:1px solid #cfe2ff;border-radius:16px;padding:clamp(1rem,3vw,1.5rem);margin:1rem 0}form{display:grid;gap:1rem;max-width:38rem}label{font-weight:650}input{display:block;width:100%;font:inherit;padding:.65rem;border:1px solid #8195b6;border-radius:8px}button{font:inherit;padding:.65rem 1rem;border:0;border-radius:8px;background:#075ca8;color:white;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #ffbf47;outline-offset:3px}.row{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}.meter,.status{padding:.8rem;border-radius:8px;background:#eef6ff}.status{min-height:3rem}.meta{color:#4a5d7a}pre{overflow:auto;background:#10213f;color:#e9f3ff;padding:1rem;border-radius:12px}
+</style>
+</head>
+<body><main>
+<p><a href="../../../lectures/lecture-08/index.html">← Về Bài giảng 08</a> · <a href="../../../index.html">Course Home</a></p>
+<h1>Events và Form validation</h1>
+<p class="meta">Thử dữ liệu sai/hợp lệ. Browser validation chạy trước submit listener; input listener cập nhật bộ đếm ký tự.</p>
+<section><h2>Form</h2>
+<form id="profile">
+<div><label for="name">Họ tên</label><input id="name" name="name" required minlength="2" autocomplete="name"></div>
+<div><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+<p id="counter" class="meter">Độ dài họ tên: 0 ký tự</p>
+<div class="row"><button type="submit">Gửi thông tin</button><button type="reset">Đặt lại</button></div>
+</form>
+<p id="status" class="status" role="status" aria-live="polite">Chưa gửi form.</p>
+</section>
+<section><h2>Mã xử lý chính</h2><pre><code>form.addEventListener("submit", event =&gt; {
+  event.preventDefault();
+  const data = new FormData(form);
+  status.textContent = data.get("name");
+});</code></pre></section>
+</main>
+<script>
+const form = document.querySelector('#profile');
+const nameInput = document.querySelector('#name');
+const counter = document.querySelector('#counter');
+const status = document.querySelector('#status');
+nameInput.addEventListener('input', event => {
+  counter.textContent = `Độ dài họ tên: ${event.target.value.length} ký tự`;
+});
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(form);
+  status.textContent = `Đã nhận thông tin của ${data.get('name')} (${data.get('email')}).`;
+});
+form.addEventListener('reset', () => {
+  status.textContent = 'Form đã được đặt lại.';
+  counter.textContent = 'Độ dài họ tên: 0 ký tự';
+});
+</script></body></html>
