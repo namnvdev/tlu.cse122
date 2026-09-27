@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nội dung HTML có cấu trúc · CSE122</title>
+  <style>
+    :root{font-family:Arial,sans-serif;color:#102759;background:#f3f8ff;--blue:#0878f9;--line:#d4e6fb}*{box-sizing:border-box}body{margin:0}header{padding:14px max(18px,calc((100% - 1000px)/2));display:flex;justify-content:space-between;background:white;border-bottom:1px solid var(--line)}a{color:var(--blue);text-decoration:none;font-weight:bold}main{max-width:1000px;margin:34px auto;padding:0 18px}.tag{display:inline-block;background:#e8f4ff;color:#1261b8;border-radius:20px;padding:5px 9px;font:11px monospace}.layout{display:grid;grid-template-columns:220px 1fr;gap:16px}.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:14px}.panel h2{margin-top:0}nav ul{padding-left:18px;line-height:2}figure{margin:14px 0;padding:18px;border:1px solid #cfe3fa;border-radius:10px;background:linear-gradient(140deg,#e9f6ff,#fff)}figcaption{font-size:12px;color:#536b91;margin-top:9px}table{width:100%;border-collapse:collapse}caption{text-align:left;font-weight:bold;padding:8px}th,td{border:1px solid var(--line);padding:9px;text-align:left}th{background:#eff7ff}pre{overflow:auto;background:#10243c;color:#e2f1ff;border-radius:9px;padding:14px;font:12px/1.6 monospace}.return{display:inline-block;margin:10px 0 25px}@media(max-width:650px){.layout{grid-template-columns:1fr}header{gap:12px;flex-wrap:wrap}}
+  </style>
+</head>
+<body>
+  <header><strong>CSE122 · Demo HTML semantic</strong><a href="../../../lectures/lecture-02/index.html">← Về Bài giảng 02</a></header>
+  <main>
+    <p class="tag">header · nav · main · article</p>
+    <h1>Một trang có cấu trúc nội dung</h1>
+    <div class="layout">
+      <nav class="panel" aria-label="Mục trong ví dụ"><b>Trong trang này</b><ul><li><a href="#intro">Giới thiệu</a></li><li><a href="#collection">Bộ sưu tập</a></li><li><a href="#hours">Giờ mở cửa</a></li></ul></nav>
+      <article class="panel">
+        <h2 id="intro">Vườn thực vật</h2><p>Khám phá các bộ sưu tập cây và không gian xanh trong khuôn viên.</p>
+        <figure><div role="img" aria-label="Minh họa khu vườn bằng hình khối màu xanh" style="height:145px;border-radius:8px;background:radial-gradient(ellipse at 50% 110%,#31936d 0 25%,transparent 26%),linear-gradient(160deg,#bde7ff,#e9f8ff 58%,#ccead5)"></div><figcaption>Hình minh họa không mang thông tin bổ sung; mô tả semantic nằm ở phần nội dung liên quan.</figcaption></figure>
+        <h2 id="collection">Điểm tham quan</h2><ul><li>Nhà kính nhiệt đới</li><li>Vườn dược liệu</li><li>Luống cây bản địa</li></ul>
+        <h2 id="hours">Giờ hoạt động</h2><table><caption>Khung giờ trong tuần</caption><thead><tr><th scope="col">Ngày</th><th scope="col">Giờ</th></tr></thead><tbody><tr><th scope="row">Thứ Hai – Thứ Sáu</th><td>08:00–17:00</td></tr><tr><th scope="row">Cuối tuần</th><td>09:00–16:00</td></tr></tbody></table>
+        <p><a href="#intro">Trở lại phần giới thiệu</a></p>
+      </article>
+    </div>
+    <section class="panel"><h2>Markup tương ứng</h2><pre><code>&lt;main&gt;
+  &lt;article&gt;
+    &lt;h1&gt;Vườn thực vật&lt;/h1&gt;
+    &lt;p&gt;Khám phá các bộ sưu tập cây…&lt;/p&gt;
+    &lt;h2&gt;Điểm tham quan&lt;/h2&gt;
+    &lt;ul&gt;&lt;li&gt;Nhà kính&lt;/li&gt;&lt;/ul&gt;
+    &lt;table&gt;…dữ liệu giờ hoạt động…&lt;/table&gt;
+  &lt;/article&gt;
+&lt;/main&gt;</code></pre><p>Trong DevTools → Elements, các node tạo thành cây; thẻ hiển thị cùng cấp ở đây vẫn mang ý nghĩa riêng.</p></section>
+    <a class="return" href="../../../lectures/lecture-02/index.html">← Quay lại Lecture 02</a>
+  </main>
+</body></html>
