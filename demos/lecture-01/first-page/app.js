@@ -1,0 +1,1 @@
+document.querySelector('#observe').addEventListener('click',()=>{document.querySelector('#result').textContent='JavaScript đã chạy trong browser.';console.info('CSE122 demo: JavaScript chạy sau khi tài liệu được nạp.');});

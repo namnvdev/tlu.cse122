@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quan sát URL và HTTP · CSE122</title>
+  <style>
+    :root{font-family:Arial,sans-serif;color:#102759;background:#f3f8ff;--blue:#0878f9;--line:#d4e6fb}*{box-sizing:border-box}body{margin:0;padding:24px}.wrap{max-width:980px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px}.top a,.btn{color:var(--blue);font-weight:bold;text-decoration:none}.panel{margin-top:18px;padding:20px;border:1px solid var(--line);border-radius:14px;background:white}.panel h1{font-size:25px;margin:0 0 8px}.muted{color:#587094;line-height:1.55}label{display:block;font-weight:bold;margin:15px 0 7px}input{width:100%;padding:12px;border:1px solid #bcd5f2;border-radius:8px;font:15px monospace}.parts,.columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;margin-top:12px}.part,.box{border:1px solid var(--line);border-radius:9px;padding:12px;background:#f8fbff;overflow-wrap:anywhere}.part b,.box b{display:block;color:var(--blue);font-size:12px;margin-bottom:5px}.btn{display:inline-block;margin-top:12px;background:var(--blue);color:#fff;border:0;border-radius:8px;padding:11px 15px;cursor:pointer}.box pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.55 monospace;margin:8px 0;color:#214064}.status{padding:9px 12px;border-radius:8px;background:#eaf8f0;color:#145331;font-weight:bold}.return{margin-top:20px;display:inline-block}@media(max-width:520px){body{padding:14px}.panel{padding:15px}}
+  </style>
+</head>
+<body><main class="wrap">
+  <div class="top"><strong>CSE122 · Demo Web Foundations</strong><a href="../../../lectures/lecture-01/index.html">← Về Bài giảng 01</a></div>
+  <section class="panel"><p class="muted">MINH HỌA TẠI CHỖ · URL VÀ REQUEST / RESPONSE</p><h1>Đọc URL, dựng một HTTP exchange</h1><p class="muted">Thay đổi URL để nhận diện scheme, host, path, query và fragment. Nút mô phỏng minh họa cấu trúc trao đổi HTTP; không gửi dữ liệu ra Internet.</p>
+    <label for="url">URL mẫu</label><input id="url" value="https://shop.example.edu:443/products?id=42#reviews" autocomplete="off">
+    <div id="parts" class="parts"></div><button id="send" class="btn" type="button">Mô phỏng GET request</button>
+  </section>
+  <section class="panel"><h2>Request → Response</h2><div class="columns"><div class="box"><b>Request</b><pre id="request">Chọn “Mô phỏng GET request”.</pre></div><div class="box"><b>Response</b><pre id="response">Response minh họa sẽ xuất hiện ở đây.</pre></div></div><p id="status" class="status" hidden></p></section>
+  <a class="return" href="../../../lectures/lecture-01/index.html">← Quay lại Lecture 01</a>
+</main><script>
+const input=document.querySelector('#url'), parts=document.querySelector('#parts');
+function analyze(){try{const u=new URL(input.value);const data=[['Scheme',u.protocol],['Host / domain',u.hostname],['Port',u.port||'(mặc định)'],['Path',u.pathname],['Query',u.search||'(không có)'],['Fragment',u.hash||'(không có)']];parts.innerHTML=data.map(([k,v])=>`<div class="part"><b>${k}</b>${v}</div>`).join('')}catch{parts.innerHTML='<div class="part">URL chưa hợp lệ · hãy nhập URL đầy đủ gồm https://</div>'}}
+input.addEventListener('input',analyze);document.querySelector('#send').addEventListener('click',()=>{try{const u=new URL(input.value);if(!/^https?:$/.test(u.protocol))throw Error();document.querySelector('#request').textContent=`GET ${u.pathname}${u.search} HTTP/1.1\nHost: ${u.host}\nAccept: text/html`;document.querySelector('#response').textContent='HTTP/1.1 200 OK\nContent-Type: text/html; charset=utf-8\nCache-Control: max-age=300\n\n<html>…tài nguyên được trả về…</html>';document.querySelector('#status').hidden=false;document.querySelector('#status').textContent='200 OK · Mô phỏng cục bộ · Fragment chỉ được browser dùng, không gửi trong HTTP request.'}catch{document.querySelector('#status').hidden=false;document.querySelector('#status').textContent='Hãy nhập URL http:// hoặc https:// hợp lệ.'}});analyze();
+</script></body></html>

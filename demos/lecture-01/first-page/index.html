@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trang Web đầu tiên · CSE122</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header><a href="../../../lectures/lecture-01/index.html">← Về Bài giảng 01</a><span>CSE122 · Demo local</span></header>
+  <main><p class="eyebrow">HTML RESPONSE → BROWSER UI</p><h1>Trang Web đầu tiên</h1><p class="lead">Browser nhận một tài liệu HTML, áp dụng CSS và hiển thị nội dung này.</p>
+    <section class="card"><h2>Quan sát tài nguyên</h2><p>Mở DevTools → Network, tải lại trang và tìm <code>index.html</code> cùng <code>styles.css</code>.</p><p>Mở Elements để xem cấu trúc DOM mà browser dựng từ HTML.</p><button id="observe" type="button">Kiểm tra JavaScript</button><output id="result"> Chưa có tương tác</output></section>
+    <p class="note">URL trên thanh địa chỉ dùng <code>file://</code> khi mở trực tiếp. Dùng local HTTP server để quan sát request qua HTTP.</p>
+  </main><script src="app.js"></script>
+</body></html>
