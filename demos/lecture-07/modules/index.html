@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ES modules · CSE122</title>
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#102654;background:#f3f8ff}*{box-sizing:border-box}body{margin:0;padding:clamp(1rem,4vw,3rem)}main{max-width:880px;margin:auto}a{color:#075ca8}section{background:#fff;border:1px solid #cfe2ff;border-radius:16px;padding:1.25rem;margin:1rem 0}pre{overflow:auto;background:#10213f;color:#e9f3ff;padding:1rem;border-radius:12px}output{display:block;background:#eef6ff;border-radius:8px;padding:1rem;white-space:pre-wrap}.meta{color:#4a5d7a}
+</style>
+</head>
+<body><main>
+<p><a href="../../../lectures/lecture-07/index.html">← Về Bài giảng 07</a> · <a href="../../../index.html">Course Home</a></p>
+<h1>ES modules: tách hàm định dạng và dữ liệu</h1>
+<p class="meta">Mở trang qua HTTP server cục bộ. Browser nạp main.js, rồi import những tên mà module cần.</p>
+<section><h2>Entry module · main.js</h2><pre><code>import { formatStudent, students } from "./data.js";
+const lines = students.map(formatStudent);
+document.querySelector("#result").textContent = lines.join("\n");</code></pre></section>
+<section><h2>Kết quả module</h2><output id="result" aria-live="polite">Đang nạp module…</output></section>
+<section><h2>Module dữ liệu · data.js</h2><pre><code>export const students = [
+  { name: "An", score: 8.5 },
+  { name: "Bình", score: 7 }
+];
+export function formatStudent(student) {
+  return `${student.name}: ${student.score}`;
+}</code></pre></section>
+<p id="error" role="status"></p>
+</main><script type="module" src="./main.js"></script></body></html>

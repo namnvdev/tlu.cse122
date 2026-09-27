@@ -1,0 +1,48 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DOM rendering · CSE122</title>
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#102654;background:#f3f8ff}*{box-sizing:border-box}body{margin:0;padding:clamp(1rem,4vw,3rem)}main{max-width:960px;margin:auto}a{color:#075ca8}section{background:#fff;border:1px solid #cfe2ff;border-radius:16px;padding:1.25rem;margin:1rem 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1rem}.card{background:#f8fbff;border:1px solid #d9e8fa;border-radius:12px;padding:1rem}.card h3{margin:.2rem 0}.card p{margin:.35rem 0}.code{overflow:auto;background:#10213f;color:#e9f3ff;padding:1rem;border-radius:12px}output{display:block;background:#eef6ff;border-radius:8px;padding:1rem}.meta{color:#4a5d7a}
+</style>
+</head>
+<body><main>
+<p><a href="../../../lectures/lecture-07/index.html">← Về Bài giảng 07</a> · <a href="../../../index.html">Course Home</a></p>
+<h1>Tạo giao diện từ DOM nodes</h1>
+<p class="meta">JavaScript tạo từng element, gán văn bản bằng textContent và lắp node vào vùng chứa.</p>
+<section><h2>Mã JavaScript</h2><pre class="code"><code>const card = document.createElement("article");
+card.className = "card";
+const title = document.createElement("h3");
+title.textContent = product.name;
+card.append(title);
+container.append(card);</code></pre></section>
+<section><h2>Sản phẩm được tạo từ dữ liệu</h2><output id="summary">Đang dựng DOM…</output><div id="products" class="grid"></div></section>
+<section><h2>Cây DOM sau khi chạy script</h2><p>Trong DevTools Elements, mở <code>#products</code> để xem các <code>article.card</code> và node con.</p></section>
+</main>
+<script>
+const products = [
+  { name: 'Sổ tay', price: '45.000 ₫', description: 'Giấy trơn, bìa xanh.' },
+  { name: 'Bình nước', price: '95.000 ₫', description: 'Thép không gỉ, 500 ml.' },
+  { name: 'Túi vải', price: '75.000 ₫', description: 'Tái sử dụng hằng ngày.' }
+];
+const container = document.querySelector('#products');
+const summary = document.querySelector('#summary');
+if (!container || !summary) throw new Error('Không tìm thấy vùng đích trong DOM');
+const cards = products.map(product => {
+  const card = document.createElement('article');
+  card.className = 'card';
+  const title = document.createElement('h3');
+  title.textContent = product.name;
+  const price = document.createElement('p');
+  price.textContent = product.price;
+  const description = document.createElement('p');
+  description.textContent = product.description;
+  card.append(title, price, description);
+  return card;
+});
+container.replaceChildren(...cards);
+summary.textContent = `${cards.length} card đã được tạo và gắn vào DOM.`;
+console.log('DOM được dựng', { products, cards, container });
+</script></body></html>
