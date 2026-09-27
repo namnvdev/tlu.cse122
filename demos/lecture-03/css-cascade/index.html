@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quan sát CSS Cascade · CSE122</title>
+  <style>
+    :root{font-family:Arial,sans-serif;color:#102759;background:#f3f8ff;--blue:#0878f9;--line:#d4e6fb}*{box-sizing:border-box}body{margin:0}header{padding:14px max(18px,calc((100% - 960px)/2));display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line)}a{color:var(--blue);font-weight:bold;text-decoration:none}main{max-width:960px;margin:34px auto;padding:0 18px}.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:19px;margin:14px 0}.actions{display:flex;gap:8px;flex-wrap:wrap}button{border:1px solid #c6ddf6;background:#f1f8ff;color:#14539a;border-radius:7px;padding:10px 12px;font-weight:bold;cursor:pointer}.preview{margin:16px 0;padding:22px;border:1px solid var(--line);border-radius:10px;background:#fff}.preview p{font-size:20px}.notice{color:#0878f9}.preview.strong .notice{color:#b42336}#target{color:#6537a8}.notice{color:#167448}.code{white-space:pre-wrap;background:#10243c;color:#e2f1ff;border-radius:9px;padding:14px;font:12px/1.65 monospace}.readout{padding:12px;background:#eaf5ff;border-radius:8px;line-height:1.7}.return{display:inline-block;margin:8px 0 25px}@media(max-width:540px){header{gap:10px;flex-wrap:wrap}}
+  </style>
+</head>
+<body><header><strong>CSE122 · Demo CSS Cascade</strong><a href="../../../lectures/lecture-03/index.html">← Về Bài giảng 03</a></header>
+<main><h1>Rule nào đang quyết định màu?</h1><p>Bật/tắt class và rule cuối; so sánh specificity, source order và computed style.</p>
+  <section class="panel"><div class="actions"><button id="class" type="button">Bật/tắt .strong</button><button id="id" type="button">Đổi ID #target</button><button id="later" type="button">Bật/tắt rule cuối</button><button id="reset" type="button">Đặt lại</button></div>
+    <article class="preview" id="preview"><p class="notice" id="target">Nội dung thử nghiệm trong preview</p></article>
+    <div class="readout" id="readout" aria-live="polite"></div></section>
+  <section class="panel"><h2>Các rule trong stylesheet</h2><pre class="code">.notice { color: #0878f9; }
+.preview.strong .notice { color: #b42336; }
+#target { color: #6537a8; }
+/* rule cuối; disabled ban đầu */
+.notice { color: #167448; }</pre><p>Chọn phần tử trong DevTools → Elements → Styles để nhận biết rule khớp và rule bị ghi đè; Computed hiển thị giá trị cuối.</p></section>
+  <a class="return" href="../../../lectures/lecture-03/index.html">← Quay lại Lecture 03</a>
+</main><style id="laterRules" disabled>.notice{color:#167448}</style><script>
+const preview=document.querySelector('#preview'),target=document.querySelector('#target'),late=document.querySelector('#laterRules'),readout=document.querySelector('#readout');
+function update(){const c=getComputedStyle(target).color;readout.textContent='class="'+target.className+'" · id="'+target.id+'" · rule cuối '+(late.sheet.disabled?'tắt':'bật')+' · computed color: '+c;}
+document.querySelector('#class').addEventListener('click',()=>{preview.classList.toggle('strong');update();});
+document.querySelector('#id').addEventListener('click',()=>{target.id=target.id==='target'?'other':'target';update();});
+document.querySelector('#later').addEventListener('click',()=>{late.sheet.disabled=!late.sheet.disabled;update();});
+document.querySelector('#reset').addEventListener('click',()=>{preview.className='preview';target.id='target';late.sheet.disabled=true;update();});update();
+</script></body></html>

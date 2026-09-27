@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kiểm tra chất lượng HTML · CSE122</title>
+  <style>
+    :root{font-family:Arial,sans-serif;color:#102759;background:#f3f8ff;--blue:#0878f9;--line:#d4e6fb}*{box-sizing:border-box}body{margin:0}header{padding:14px max(18px,calc((100% - 960px)/2));display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line)}a{color:var(--blue);font-weight:bold;text-decoration:none}main{max-width:960px;margin:34px auto;padding:0 18px}.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:19px;margin:14px 0}.actions{display:flex;gap:8px;flex-wrap:wrap}button{border:1px solid #c6ddf6;background:#f1f8ff;color:#14539a;border-radius:7px;padding:10px 12px;font-weight:bold;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #0878f9;outline-offset:3px}.sample{border:1px solid var(--line);border-radius:10px;padding:17px;margin-top:13px;background:#fbfdff}.sample h1{font-size:25px}.sample h2{font-size:19px}.sample a{display:inline-block;margin:5px 0}.sample.bad h1{font-size:19px}.sample.bad [data-fake]{font-size:28px;font-weight:bold}.sample.bad a{color:#9eb0c5}.tag{font:12px monospace;color:#1760aa;background:#eaf5ff;padding:5px 8px;border-radius:20px}.code{white-space:pre-wrap;background:#10243c;color:#e2f1ff;border-radius:9px;padding:14px;font:12px/1.6 monospace}.status{padding:12px;background:#eaf8f0;border-radius:8px;color:#145331;line-height:1.6}.return{display:inline-block;margin:8px 0 25px}@media(max-width:540px){header{gap:10px;flex-wrap:wrap}}
+  </style>
+</head>
+<body><header><strong>CSE122 · Demo HTML Quality</strong><a href="../../../lectures/lecture-03/index.html">← Về Bài giảng 03</a></header>
+<main><h1>Markup, ngữ nghĩa và keyboard</h1><p>Chuyển chế độ để so sánh cấu trúc nội dung và cách các điều khiển hoạt động.</p>
+  <section class="panel"><div class="actions"><button id="good" type="button">Markup semantic</button><button id="poor" type="button">Ví dụ cần cải thiện</button><button id="focus" type="button">Thử keyboard focus</button></div>
+    <article class="sample" id="sample"><span class="tag">main · article</span><h1 id="heading">Vườn thực vật</h1><div id="badHeading" data-fake hidden>Vườn thực vật</div><p>Thông tin giờ mở cửa và các khu vực tham quan.</p><h2>Bộ sưu tập</h2><ul><li>Nhà kính nhiệt đới</li><li>Vườn dược liệu</li></ul><a href="#hours">Xem giờ mở cửa</a><p id="hours">Mỗi ngày · 08:00–17:00</p><button id="action" type="button">Xem hướng dẫn</button></article>
+    <p class="status" id="status" aria-live="polite">Cấu trúc có heading thật, danh sách thật, liên kết có đích và button native.</p>
+  </section>
+  <section class="panel"><h2>Kiểm tra markup với validator</h2><p>Validator báo lỗi cú pháp/cấu trúc; kết quả không thay thế đánh giá accessibility hoặc kiểm tra nội dung.</p><pre class="code">&lt;!doctype html&gt;
+&lt;html lang="vi"&gt;
+  &lt;head&gt;&lt;title&gt;Vườn thực vật&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;&lt;main&gt;…nội dung…&lt;/main&gt;&lt;/body&gt;
+&lt;/html&gt;</pre><a href="https://validator.w3.org/nu/" target="_blank" rel="noopener noreferrer">Mở Nu HTML Checker (W3C) ↗</a><p>Trang này chạy cục bộ. Với validator trực tuyến, sao chép markup mẫu vào chế độ Direct Input.</p></section>
+  <a class="return" href="../../../lectures/lecture-03/index.html">← Quay lại Lecture 03</a>
+</main><script>
+const sample=document.querySelector('#sample'),status=document.querySelector('#status');
+document.querySelector('#good').addEventListener('click',()=>{sample.classList.remove('bad');document.querySelector('#heading').hidden=false;document.querySelector('#badHeading').hidden=true;status.textContent='Markup có h1/h2 theo thứ bậc, ul/li cho danh sách và button native có thể nhận keyboard focus.';});
+document.querySelector('#poor').addEventListener('click',()=>{sample.classList.add('bad');document.querySelector('#heading').hidden=true;document.querySelector('#badHeading').hidden=false;status.textContent='Ví dụ cần cải thiện dùng div giả heading, link khó thấy. Cấu trúc và cách nhận biết nội dung suy giảm dù nội dung vẫn hiện.';});
+document.querySelector('#focus').addEventListener('click',()=>{document.querySelector('#action').focus();status.textContent='Viền focus nhìn thấy cho biết button native đang nhận thao tác keyboard.';});
+</script></body></html>

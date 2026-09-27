@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Màu, đơn vị và Typography · CSE122</title>
+  <style>
+    :root{font-family:Arial,sans-serif;color:#102759;background:#f3f8ff;--blue:#0878f9;--line:#d4e6fb}*{box-sizing:border-box}body{margin:0}header{padding:14px max(18px,calc((100% - 960px)/2));display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line)}a{color:var(--blue);font-weight:bold;text-decoration:none}main{max-width:960px;margin:34px auto;padding:0 18px}.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:20px;margin:14px 0}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}.controls label{display:block;font-weight:bold}.controls input,.controls select{display:block;margin-top:7px;width:100%}.preview{--accent:#0878f9;--scale:1rem;margin-top:18px;padding:20px;border:1px solid var(--line);border-radius:12px;color:#173966;background:rgb(8 120 249 / 7%);font-family:Arial,sans-serif}.preview h2{color:var(--accent);font-size:calc(var(--scale) * 1.6);margin:0 0 10px}.preview p{font-size:var(--scale);line-height:1.65}.readout{font:12px/1.7 monospace;white-space:pre-wrap;padding:12px;background:#10243c;color:#e2f1ff;border-radius:9px;overflow-wrap:anywhere}.return{display:inline-block;margin:8px 0 25px}@media(max-width:540px){header{gap:10px;flex-wrap:wrap}}
+  </style>
+</head>
+<body><header><strong>CSE122 · Demo CSS Styling</strong><a href="../../../lectures/lecture-03/index.html">← Về Bài giảng 03</a></header>
+<main><h1>Một document · nhiều lựa chọn style</h1><p>Điều chỉnh palette và font-size. Quan sát preview và giá trị CSS tính toán.</p>
+  <section class="panel"><div class="controls"><label for="color">Màu nhấn<select id="color"><option value="#0878f9">TLU blue</option><option value="#167448">Green</option><option value="#a64224">Terracotta</option></select></label><label for="size">Cỡ chữ <input id="size" type="range" min="14" max="24" value="16"></label><label for="unit">Đơn vị<select id="unit"><option value="px">px</option><option value="rem">rem (quy đổi minh họa)</option></select></label></div>
+    <article class="preview" id="preview"><p class="eyebrow">VƯỜN THỰC VẬT</p><h2>Khám phá bộ sưu tập</h2><p>Cấu trúc HTML giữ nguyên trong khi CSS thay đổi màu sắc và typography. Browser tính các giá trị cuối cho từng element.</p><a href="#computed">Xem style computed</a></article>
+    <h2 id="computed">Computed values</h2><pre class="readout" id="readout"></pre></section>
+  <section class="panel"><h2>CSS tương ứng</h2><pre class="readout">.preview { color: #173966; background: rgb(8 120 249 / 7%); }
+.preview h2 { color: var(--accent); font-size: 1.6em; }
+.preview p { font-size: var(--scale); line-height: 1.65; }</pre><p>Computed values giúp kiểm tra kết quả của rule và inheritance trong browser.</p></section>
+  <a class="return" href="../../../lectures/lecture-03/index.html">← Quay lại Lecture 03</a>
+</main><script>
+const preview=document.querySelector('#preview'),color=document.querySelector('#color'),size=document.querySelector('#size'),unit=document.querySelector('#unit'),readout=document.querySelector('#readout');
+function update(){const n=Number(size.value),base=unit.value==='px'?n+'px':(n/16).toFixed(2)+'rem';preview.style.setProperty('--accent',color.value);preview.style.setProperty('--scale',base);const h=getComputedStyle(preview.querySelector('h2')),p=getComputedStyle(preview.querySelector('p:not(.eyebrow)'));readout.textContent='accent: '+color.value+'\nfont-size (paragraph): '+p.fontSize+'\nline-height: '+p.lineHeight+'\nfont-family: '+p.fontFamily+'\nheading size: '+h.fontSize;}
+color.addEventListener('input',update);size.addEventListener('input',update);unit.addEventListener('input',update);update();
+</script></body></html>
