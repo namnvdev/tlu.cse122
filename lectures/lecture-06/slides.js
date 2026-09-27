@@ -40,7 +40,7 @@ const slides = [
 {p:3,e:'6.3 · MUTATION',t:'Array và object gán bằng tham chiếu có thể bị thay đổi',code:'const scores = [7, 8];\nscores.push(9); // sửa array\nconst student = { name: "An" };\nstudent.name = "Bình"; // sửa thuộc tính'},
 {p:3,e:'6.3 · ARRAY METHODS',t:'map tạo danh sách kết quả tương ứng',code:'const prices = [10, 20, 30];\nconst withTax = prices.map(price => price * 1.1);\n// [11, 22, 33]'},
 {p:3,e:'6.3 · ARRAY METHODS',t:'filter giữ lại phần tử thỏa điều kiện',code:'const scores = [4, 7, 9];\nconst passing = scores.filter(score => score >= 5);\n// [7, 9]'},
-{p:3,e:'6.3 · ARRAY METHODS',t:'reduce tổng hợp danh sách thành một giá trị',code:'const prices = [10, 20, 30];\nconst total = prices.reduce(\n  (sum, price) => sum + price, 0\n);\n// 60'},
+{p:3,e:'6.3 · ARRAY METHODS',t:'reduce tổng hợp danh sách thành một giá trị',code:'const prices = [10, 20, 30];\nconst total = prices.reduce(\n  (sum, price) => sum + price, 0\n);\n// 60',visual:'v10-reduce-accumulator'},
 {p:3,e:'6.3 · DESTRUCTURING',t:'Destructuring lấy thuộc tính hoặc phần tử vào biến',code:'const student = { name: "An", score: 8 };\nconst { name, score } = student;\nconst [first, second] = [10, 20];'},
 {p:3,e:'6.3 · SPREAD',t:'Spread tạo array/object mới từ dữ liệu sẵn có',code:'const scores = [7, 8];\nconst updated = [...scores, 9];\nconst student = { name: "An", score: 8 };\nconst revised = { ...student, score: 9 };'},
 {p:3,e:'6.3 · REST',t:'Rest gom phần còn lại thành một array hoặc object',code:'const [first, ...others] = [10, 20, 30];\nfunction sum(...values) {\n  return values.reduce((a, b) => a + b, 0);\n}'},
