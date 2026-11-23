@@ -1,1 +1,11 @@
 test
+
+ git branch b-test  ---> nhanhs b-test (local)
+
+ git switch b-test --> main --> b-test (local)
+
+ git push -u origin b-test --> tao b-test (remoted)
+
+
+ git fetch -a
+ git pull -u origin b-test
